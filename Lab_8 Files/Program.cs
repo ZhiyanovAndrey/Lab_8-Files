@@ -7,13 +7,13 @@ using System.IO;
 
 namespace Lab_8_Files
 {
-    //1.Выберите любую папку на своем компьютере, имеющую вложенные директории.
+    //8.1.Выберите любую папку на своем компьютере, имеющую вложенные директории.
     //Выведите на консоль ее содержимое и содержимое всех подкаталогов.
     class Program
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\Андрей\source\repos";
+            string path = @"C:\QTTabBar";
             Print(path,0);
             Console.ReadKey();
         }
@@ -24,7 +24,7 @@ namespace Lab_8_Files
 
             if (dirs.Count() > 0 || files.Count() > 0)
             {
-                string offset = new string('\t', level);
+                string offset = new string('\t', level);//добавляет отступ
                 foreach (string s in files)
                 {
                     Console.WriteLine(offset + s);
@@ -32,7 +32,9 @@ namespace Lab_8_Files
                 foreach (string s in dirs)
                 {
                     Console.WriteLine(offset + s);
-                    Print(s, level + 1); //Можно вызвать метод и внутри самого себя с путем к следующей папке
+                    Print(s, level + 1); /*Рекурсия взыов метода внутри самого себя с другим аргументом с путем к 
+                                          * следующей папке и добавляет уровень */
+                                                     
                 }
             }
 
