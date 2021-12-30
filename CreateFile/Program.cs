@@ -27,20 +27,42 @@ namespace CreateFile
             }
             Random random = new Random();
             int[] num = new int[10];
-     //using - предпочтительный метод работы для StreamWriter и StreamReader
+            //using - предпочтительный метод работы для StreamWriter и StreamReader
             using (StreamWriter sw = new StreamWriter(pathfile, true))//true-дописывать, false-перезапись по умолчанию
             {
                 for (int i = 0; i < 10; i++) //ввод одномерного массива из случайных элементов
                 {
                     num[i] = random.Next(0, 9);
                     sw.Write(num[i]);
-                                    }
-                sw.WriteLine();
+                }
+
             }
-            using(StreamReader sr = new StreamReader(pathfile, true))
+
+
+            string line = string.Empty;
+            using (StreamReader sr = new StreamReader(pathfile, true))
             {
                 Console.WriteLine(sr.ReadToEnd());
+                line = sr.ReadToEnd();
+
             }
+            line = File.ReadAllText(pathfile);
+
+            char[] ar = line.ToCharArray();
+            string[] Y = new string[line.Length]; //без преобразования в строку не работает конвертация в int
+            int[] array = new int[line.Length];
+            int sum = 0;
+            for (int i = 0; i < line.Length; i++)
+            {
+                Y[i] = Convert.ToString(ar[i]);
+                int a = Convert.ToInt32(Y[i]);
+                array[i] = a;
+                sum += a;
+            }
+
+            Console.WriteLine("Сумма элементов файла: " + sum);
+
+
             Console.ReadKey();
         }
     }
